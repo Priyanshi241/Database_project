@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Student List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Enrollment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.StudentID }}</td>
+                <td>{{ student.FirstName }}</td>
+                <td>{{ student.LastName }}</td>
+                <td>{{ student.DateOfBirth }}</td>
+                <td>{{ student.Gender }}</td>
+                <td>{{ student.Email }}</td>
+                <td>{{ student.PhoneNumber }}</td>
+                <td>{{ student.EnrollmentDate }}</td>
+                <td>
+                    <a href="{{ url_for('delete', student_id=student.StudentID) }}">Delete</a><br>
+                    <a href="{{ url_for('update_student', student_id=student.StudentID) }}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

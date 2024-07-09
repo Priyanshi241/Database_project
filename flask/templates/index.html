@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<body>
+    <h1>Welcome to the Students Management</h1>
+    <p1>Here are some of the options that can done on student data</p1>
+    <ul>
+        <li><a href="{{ url_for('add_student') }}">Add Student</a></li>
+        <li><a href="{{ url_for('delete') }}">Delete Student</a></li>
+        <li><a href="{{ url_for('update_student') }}">Update Student</a></li>
+        <li><a href="{{ url_for('search_student') }}">Search Student</a></li>
+        <li><a href="{{ url_for('show_students_route') }}">Display Student</a></li>
+    </ul>
+    
+</body>
+</html>

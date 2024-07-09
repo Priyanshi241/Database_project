@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="text"], button {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Student</h1>
+    <form method="POST">
+        <label for="column">Enter the column</label>
+        <select id="column" name="column" required>
+            <option value="">Select the column</option>
+            <option value="StudentID">Student ID</option>
+            <option value="FirstName">First Name</option>
+            <option value="LastName">Last Name</option>
+            <option value="DateOfBirth">DOB</option>
+            <option value="Gender">Gender</option>
+            <option value="Email">Email</option>
+            <option value="PhoneNumber">Phone Number</option>
+            <option value="EnrollmentDate">Enrollment Date</option>
+        </select><br>
+
+        <label for="value">Value</label>
+        <input type="text" id="value" name="value" required>
+
+        <button type="submit">Search</button>
+    </form>
+    {% if students %}
+    <h2>Search Results</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Enrollment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.StudentID }}</td>
+                <td>{{ student.FirstName }}</td>
+                <td>{{ student.LastName }}</td>
+                <td>{{ student.DateOfBirth }}</td>
+                <td>{{ student.Gender }}</td>
+                <td>{{ student.Email }}</td>
+                <td>{{ student.PhoneNumber }}</td>
+                <td>{{ student.EnrollmentDate }}</td>
+                <td>
+                    <a href="{{ url_for('delete', student_id=student.StudentID) }}">Delete</a><br>
+                    <a href="{{ url_for('update_student', student_id=student.StudentID) }}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

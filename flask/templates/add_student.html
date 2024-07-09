@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            padding-right: 20px;
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Student</h1>
+    {% if errors %}
+        <div class="error">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form id="studentForm" method="POST" action="/add_student">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required value="{{ request.form.first_name if errors else '' }}"><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required value="{{ request.form.last_name if errors else '' }}"><br>
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" required value="{{ request.form.date_of_birth if errors else '' }}"><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Select the gender">Select the gender</option>
+            <option value="Male" {% if request.form.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if request.form.gender == 'Female' %}selected{% endif %}>Female</option>
+            <option value="Other" {% if request.form.gender == 'Other' %}selected{% endif %}>Other</option>
+        </select><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required value="{{ request.form.email if errors else '' }}"><br>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required value="{{ request.form.phone_number if errors else '' }}"><br>
+        <button type="submit" style="display: block; margin: 0 auto;" onclick="pop()">Add Student</button>
+    </form>
+</body>
+</html>
